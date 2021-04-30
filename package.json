@@ -1,0 +1,11 @@
+{
+  "name": "letswrite-github-api-issues",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "dayjs": "^1.10.4",
+    "marked": "^2.0.3"
+  }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>GitHub REST API：取 Issue、Comments - Augustus - Let's Write</title>
+    <link rel="canonical" href="https://letswrite.tw/github-api-issue-get/"/>
+    <meta property="og:url" content="https://letswritetw.github.io/letswrite-github-api-issue-get/"/>
+    <meta property="fb:app_id" content="911000986339138"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Let's Write"/>
+    <meta property="og:title" content="GitHub REST API：取 Issue、Comments - Augustus - Let's Write"/>
+    <meta itemprop="name" content="GitHub REST API：取 Issue、Comments - Augustus - Let's Write"/>
+    <meta name="description" content="GitHub REST API：取 Issue、Comments"/>
+    <meta property="og:description" content="GitHub REST API：取 Issue、Comments"/>
+    <meta itemprop="description" content="GitHub REST API：取 Issue、Comments"/>
+    <meta itemprop="image" content="https://letswritetw.github.io/letswrite-github-api-issue-get/fb.jpg"/>
+    <meta property="og:image" content="https://letswritetw.github.io/letswrite-github-api-issue-get/fb.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content="GitHub REST API：取 Issue、Comments"/>
+    <link rel="shortcut icon" href="https://letswritetw.github.io/letswritetw/dist/img/logo_512.png"/>
+    <link rel="stylesheet" href="dist/style.min.css"/>
+    <!-- Google Tag Manager-->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PGQ9WQT');
+    </script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGQ9WQT" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <div class="container" id="app">
+      <h1 class="text-center">GitHub REST API：取 Issue、Comments</h1>
+      <hr/>
+      <h2>取得單個 Issue 內容<small><a href="https://docs.github.com/en/rest/reference/issues#get-an-issue" target="_blank" rel="noopener noreferrer">#doc</a></small></h2>
+      <blockquote v-if="anIssue != null">
+        <h3>{{ anIssue.title }}<a :href="anIssue.html_url" target="_blank" rel="noopener noreferrer"> {{ '#' + anIssue.number }}</a></h3>
+        <hr/>
+        <div v-html="markdownToHtml(anIssue.body)"></div>
+        <footer>
+          <cite>{{ formatTime(anIssue.updated_at) }}</cite>
+        </footer>
+      </blockquote>
+      <hr/>
+      <h2>取單個 Issue 裡的所有 Comments<small><a href="https://docs.github.com/en/rest/reference/issues#list-issue-comments" target="_blank" rel="noopener noreferrer">#doc</a></small></h2>
+      <section>
+        <div class="card d-flex mb-16" v-for="c in anIssueComments">
+          <div class="avatar"><a class="d-block" :href="c.user.html_url" target="_blank" rel="noopener noreferrer"><img :src="c.user.avatar_url"/></a></div>
+          <div class="info">
+            <h3><a :href="c.user.html_url" target="_blank" rel="noopener noreferrer">{{ c.user.login }}</a></h3>
+            <div class="content" v-html="markdownToHtml(c.body)"></div>
+            <h6><a :href="c.html_url" target="_blank" rel="noopener noreferrer">{{ formatTime(c.updated_at) }} </a></h6>
+          </div>
+        </div>
+      </section>
+      <hr/>
+      <div class="mb-16 text-center">
+        <p>GitHub 上新增一個後留言，重整此頁面便可看到：</p><a class="btn" href="https://github.com/letswritetw/letswrite-github-api-issues-get/issues/1" target="_blank" rel="noopener noreferrer">GitHub Issues</a>
+      </div>
+      <hr/>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="dist/main.min.js"></script>
+  </body>
+</html>
